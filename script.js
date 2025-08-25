@@ -1,4 +1,5 @@
-// TO-DO:  add rate of tick upgrade, learn key value pairs
+// TO-DO:  add rate of tick upgrade, learn key value pairs, make key value pairs for all upgrades,
+//         come up with interesting mechanics for each upgrade
 
 
 
@@ -14,7 +15,7 @@ let multi = 1
 let barrier = 10
 let rateOfTick = 1000
 let click = 1
-let clickBarrier = 100
+let clickBarrier = 10
 priceOne.textContent = barrier
 total.textContent = number
 clickerPrice.textContent = clickBarrier
@@ -65,6 +66,7 @@ function clickerUp() {
         click += 1
         clickBarrier *= 2
         clickerPrice.textContent = clickBarrier
+        Upgrades.clickerUpgrade += 1
     }
 }
 
