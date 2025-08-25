@@ -1,3 +1,8 @@
 .increase {
     background-color: rgb(103, 102, 102);
 }
+
+.price {
+    margin: 0;
+    padding: 0;
+}
