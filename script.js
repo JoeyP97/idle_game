@@ -1,4 +1,4 @@
-// TO-DO:  add rate of tick upgrade, learn key value pairs, make key value pairs for all upgrades,
+// TO-DO:  add rate of tick upgrade, learn key value pairs, make array of key value pairs for all upgrades,
 //         come up with interesting mechanics for each upgrade
 
 
@@ -7,10 +7,10 @@
 
 
 let total = document.querySelector('.total')
-let increase = document.querySelector('.increase')
+let increase = document.querySelector('#increase')
 let priceOne = document.querySelector('.onePrice')
 let clickerPrice = document.querySelector('.clickerPrice')
-let number = 0
+let number = 8
 let multi = 1
 let barrier = 10
 let rateOfTick = 1000
@@ -20,11 +20,45 @@ priceOne.textContent = barrier
 total.textContent = number
 clickerPrice.textContent = clickBarrier
 
+// checks each button clicked for upgrade of same type
+document.addEventListener('click', (e) =>
+{
+    let elementId
+    if(e.target.tagName == 'BUTTON'){
+         elementId = e.target.id
+    } else (elementId = e.target.parentElement.id )
+    
+    console.log(elementId)
+    for (let i = 0; i < Upgrades.length;i++){
+        if (elementId == `${Upgrades[i].name.id}`){
+            if (number >= Upgrades[i].price){
+                number -=  Upgrades[i].price
+                Upgrades[i].price *= Upgrades[i].multi
+                Upgrades[i].text.textContent = Math.round(Upgrades[i].price)
+            }
+        } 
+    }
+}
+)
+
 
 // Declare upgrade keys
-let Upgrades= {
-    clickerUpgrade: 50
-}
+let Upgrades= [
+    {
+        "name": increase,
+        "price": 10,
+        "multi": 1.3,
+        "text": priceOne,
+    },
+    {
+        "name": clickerUpgrade,
+        "price": 10,
+        "multi": 1.2,
+        "text": clickerPrice,
+    }
+
+    ]
+
 
 function clicker() {
     number += click
@@ -35,13 +69,23 @@ function clicker() {
 // check if upgrade is affordable
 setInterval( () => {
     total.textContent = number.toFixed(0)
-    if (number >= barrier) {
-        increase.style.backgroundColor = "rgb(197, 197, 197)"
-        increase.style.boxShadow = "2px 2px 5px gray"
-    }
-    else if (number < barrier) {
-        increase.style.backgroundColor = "rgb(103, 102, 102)"
-        increase.style.boxShadow = "0px 0px 0px white"
+    // if (number >= barrier) {
+    //     increase.style.backgroundColor = "rgb(197, 197, 197)"
+    //     increase.style.boxShadow = "2px 2px 5px gray"
+    // }
+    // else if (number < barrier) {
+    //     increase.style.backgroundColor = "rgb(103, 102, 102)"
+    //     increase.style.boxShadow = "0px 0px 0px white"
+    // }
+    for (let i = 0; i < Upgrades.length;i++) {
+        if (number >= Upgrades[i].price){
+            Upgrades[i].name.style.backgroundColor = "rgb(197, 197, 197)"
+            Upgrades[i].name.style.boxShadow = "2px 2px 5px gray"
+        }
+        else if (number < Upgrades[i].price) {
+         Upgrades[i].name.style.backgroundColor = "rgb(103, 102, 102)"
+         Upgrades[i].name.style.boxShadow = "0px 0px 0px white"
+        }
     }
 },100)
 
@@ -52,14 +96,25 @@ setInterval( () => {
 },rateOfTick)
 
 // -------Upgrades-------
-function upgradeOne() {
-    if (number >= barrier) {
-        number -= barrier
-        multi += 1
-        barrier *= (multi)
-        priceOne.textContent = Math.round(barrier)
-    }
-}
+// function upgradeOne() {
+//     // if (number >= barrier) {
+//     //     number -= barrier
+//     //     multi += 1
+//     //     barrier *= (multi)
+//     //     priceOne.textContent = Math.round(barrier)
+//     // }
+
+//     for (let i = 0; i < Upgrades.length;i++){
+//         if (this.id == Upgrades[i].name){
+//             if (number >= Upgrades[i].price){
+//                 number -=  Upgrades[i].price
+//                 Upgrades[i].price *= Upgrades[i].multi
+//                 priceOne.textContent = Math.round(Upgrades[i].price)
+//             }
+//         }
+//     }
+
+// }
 
 function clickerUp() {
     if (number >= clickBarrier) {
