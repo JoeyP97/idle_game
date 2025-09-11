@@ -26,14 +26,16 @@ let Upgrades= [
         "price": 10,
         "multi": 1.3,
         "text": priceOne,
-        "upgrade": .3,
+        "upgrade": 1,
+        "quantity": 0,
     },
     {
         "name": clickerUpgrade,
         "price": 10,
         "multi": 1.2,
         "text": clickerPrice,
-        "upgrade": .1,
+        "upgrade": .3,
+        "quantity": 0,
     },
     {
         "name": rateOfTickUpgrade,
@@ -41,6 +43,7 @@ let Upgrades= [
         "multi": 1.8,
         "text": ratePrice,
         "upgrade": 500,
+        "quantity": 0,
     }
 
     ]
@@ -64,7 +67,15 @@ document.addEventListener('click', (e) =>
                 if (Upgrades[i].name == clickerUpgrade){
                     click += Upgrades[i].upgrade
                 } else if (Upgrades[i].name == rateOfTickUpgrade) {
-                    rateOfTick -= Upgrades[i].upgrade
+                    if (rateOfTick >= 1000) {
+                        rateOfTick -= Upgrades[i].upgrade
+                        clearInterval(rateSet)
+                        setRate(add, rateOfTick)
+                        if (rateOfTick <= 500) {
+                            Upgrades[i].text.textContent = "MAX"
+                            Upgrades[i].price = Infinity
+                        } 
+                    } else (Upgrades[i].text.textContent = "MAX")
                 } else (multi += Upgrades[i].upgrade)
             }
         } 
@@ -104,8 +115,26 @@ setInterval( () => {
 },100)
 
 // Increase number every (rateOfTick) seconds by (multi)
-setInterval( () => {
+// let rateSet = setInterval( () => {
+//         number += (multi)
+//         total.textContent = number.toFixed(0)
+//     },rateOfTick)
+
+// clearInterval(rateSet)
+function add() {
     number += (multi)
     total.textContent = number.toFixed(0)
-},rateOfTick)
+}
+
+let rateSet = setInterval(add, rateOfTick)
+
+
+
+function setRate(func, tickRate) {
+    rateSet = setInterval(func, tickRate)
+}
+
+
+
+
 
