@@ -7,11 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <p class="total"></p>
-    <button class="upgrade"  id="clicker" onclick="clicker()">Click Me!</button>
-    <button class="upgrade"  id="increase" type="button">Upgrade One <p class="price onePrice"></p></button>
-    <button class="upgrade" id="clickerUpgrade" >Click Upgrade <p class="price clickerPrice"></p></button>
-    <button class="upgrade" id="rateOfTickUpgrade" > Rate Upgrade <p class="price ratePrice"></p></button>
+    <div class="total-container"><p class="total"></p></div>
+
+    <button class="clicker"  id="clicker" onclick="clicker()">Click Me!</button>
+
+    <div class="upgrade-container">   
+        <button class="upgrade"  id="increase" type="button">Upgrade One <p class="price onePrice"></p></button>
+        <button class="upgrade" id="clickerUpgrade" >Click Upgrade <p class="price clickerPrice"></p></button>
+        <button class="upgrade" id="rateOfTickUpgrade" > Rate Upgrade <p class="price ratePrice"></p></button>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>

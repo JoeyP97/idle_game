@@ -13,3 +13,26 @@
     gap: 5px;
     margin-top: 5px;
 }
+
+.total-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+.total {
+    margin: 0;
+    padding: 0;
+}
+
+.upgrade-container {
+    display: flex;
+    gap: 10px;
+}
+
+.clicker {
+    margin-bottom: 10px;
+}
