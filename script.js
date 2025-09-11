@@ -7,13 +7,13 @@
 
 
 let total = document.querySelector('.total')
-let increase = document.querySelector('#increase')
 let priceOne = document.querySelector('.onePrice')
 let clickerPrice = document.querySelector('.clickerPrice')
+let ratePrice = document.querySelector('.ratePrice')
 let number = 8
 let multi = 1
 let barrier = 10
-let rateOfTick = 1000
+let rateOfTick = 3000
 let click = 1
 let clickBarrier = 10
 
@@ -26,12 +26,21 @@ let Upgrades= [
         "price": 10,
         "multi": 1.3,
         "text": priceOne,
+        "upgrade": .3,
     },
     {
         "name": clickerUpgrade,
         "price": 10,
         "multi": 1.2,
         "text": clickerPrice,
+        "upgrade": .1,
+    },
+    {
+        "name": rateOfTickUpgrade,
+        "price": 10,
+        "multi": 1.8,
+        "text": ratePrice,
+        "upgrade": 500,
     }
 
     ]
@@ -52,6 +61,11 @@ document.addEventListener('click', (e) =>
                 number -=  Upgrades[i].price
                 Upgrades[i].price *= Upgrades[i].multi
                 Upgrades[i].text.textContent = Math.round(Upgrades[i].price)
+                if (Upgrades[i].name == clickerUpgrade){
+                    click += Upgrades[i].upgrade
+                } else if (Upgrades[i].name == rateOfTickUpgrade) {
+                    rateOfTick -= Upgrades[i].upgrade
+                } else (multi += Upgrades[i].upgrade)
             }
         } 
     }
@@ -59,11 +73,12 @@ document.addEventListener('click', (e) =>
 )
 
 
-
+// set default prices
     for (let i = 0; i < Upgrades.length;i++){
     Upgrades[i].text.textContent = Upgrades[i].price
 }
 
+// clicker
 function clicker() {
     number += click
 }
@@ -88,39 +103,9 @@ setInterval( () => {
     }
 },100)
 
-// Increase number every (rateOfTick) seconds by (1 * multi)
+// Increase number every (rateOfTick) seconds by (multi)
 setInterval( () => {
     number += (multi)
     total.textContent = number.toFixed(0)
 },rateOfTick)
-
-// -------Upgrades-------
-// function upgradeOne() {
-//     // if (number >= barrier) {
-//     //     number -= barrier
-//     //     multi += 1
-//     //     barrier *= (multi)
-//     //     priceOne.textContent = Math.round(barrier)
-//     // }
-
-//     for (let i = 0; i < Upgrades.length;i++){
-//         if (this.id == Upgrades[i].name){
-//             if (number >= Upgrades[i].price){
-//                 number -=  Upgrades[i].price
-//                 Upgrades[i].price *= Upgrades[i].multi
-//                 priceOne.textContent = Math.round(Upgrades[i].price)
-//             }
-//         }
-//     }
-
-// }
-
-// function clickerUp() {
-//     if (number >= clickBarrier) {
-//         click += 1
-//         clickBarrier *= 2
-//         clickerPrice.textContent = clickBarrier
-//         Upgrades.clickerUpgrade += 1
-//     }
-// }
 
