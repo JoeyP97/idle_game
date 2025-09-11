@@ -16,9 +16,26 @@ let barrier = 10
 let rateOfTick = 1000
 let click = 1
 let clickBarrier = 10
-priceOne.textContent = barrier
+
 total.textContent = number
-clickerPrice.textContent = clickBarrier
+
+// Declare upgrade keys
+let Upgrades= [
+    {
+        "name": increase,
+        "price": 10,
+        "multi": 1.3,
+        "text": priceOne,
+    },
+    {
+        "name": clickerUpgrade,
+        "price": 10,
+        "multi": 1.2,
+        "text": clickerPrice,
+    }
+
+    ]
+
 
 // checks each button clicked for upgrade of same type
 document.addEventListener('click', (e) =>
@@ -42,23 +59,10 @@ document.addEventListener('click', (e) =>
 )
 
 
-// Declare upgrade keys
-let Upgrades= [
-    {
-        "name": increase,
-        "price": 10,
-        "multi": 1.3,
-        "text": priceOne,
-    },
-    {
-        "name": clickerUpgrade,
-        "price": 10,
-        "multi": 1.2,
-        "text": clickerPrice,
-    }
 
-    ]
-
+    for (let i = 0; i < Upgrades.length;i++){
+    Upgrades[i].text.textContent = Upgrades[i].price
+}
 
 function clicker() {
     number += click
@@ -69,14 +73,9 @@ function clicker() {
 // check if upgrade is affordable
 setInterval( () => {
     total.textContent = number.toFixed(0)
-    // if (number >= barrier) {
-    //     increase.style.backgroundColor = "rgb(197, 197, 197)"
-    //     increase.style.boxShadow = "2px 2px 5px gray"
-    // }
-    // else if (number < barrier) {
-    //     increase.style.backgroundColor = "rgb(103, 102, 102)"
-    //     increase.style.boxShadow = "0px 0px 0px white"
-    // }
+
+
+
     for (let i = 0; i < Upgrades.length;i++) {
         if (number >= Upgrades[i].price){
             Upgrades[i].name.style.backgroundColor = "rgb(197, 197, 197)"
@@ -116,12 +115,12 @@ setInterval( () => {
 
 // }
 
-function clickerUp() {
-    if (number >= clickBarrier) {
-        click += 1
-        clickBarrier *= 2
-        clickerPrice.textContent = clickBarrier
-        Upgrades.clickerUpgrade += 1
-    }
-}
+// function clickerUp() {
+//     if (number >= clickBarrier) {
+//         click += 1
+//         clickBarrier *= 2
+//         clickerPrice.textContent = clickBarrier
+//         Upgrades.clickerUpgrade += 1
+//     }
+// }
 
